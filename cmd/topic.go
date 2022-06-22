@@ -5,20 +5,19 @@ import (
 
 	"github.com/spf13/cobra"
 	client "kafka-client/kafka"
-	util "kafka-client/util"
 )
 
 func init() {
-	rootCmd.AddCommand(topicCmd)
+	topicCmd.PersistentFlags().StringVar(&topicName, "topic", "", "name of the topic to listen")
 }
 
 var topicCmd = &cobra.Command{
 	Use: "topic",
 	Short: "Creates a new topic in kafka",
-	Run: runFn}
+	Run: runFn,
+}
 
 func runFn(cmd *cobra.Command, args []string) {
-	conf := util.ReadConfig("client.properties")
 	fmt.Println("Creating new topic")
-	client.CreateTopic(&conf, "", 2, 1)
+	client.CreateTopic(&config, topicName, 2, 1)
 }

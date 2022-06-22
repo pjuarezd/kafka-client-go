@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/confluentinc/confluent-kafka-go v1.8.2
-	github.com/spf13/cobra v1.4.0
+	github.com/spf13/cobra v1.5.0
 )
 
 require (

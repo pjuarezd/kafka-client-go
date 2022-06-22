@@ -1,7 +1,9 @@
 package util
 
-import(
+import (
+	"encoding/csv"
 	"bufio"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -33,4 +35,25 @@ func ReadConfig(configFilePath string) kafka.ConfigMap {
 		os.Exit(1)
 	}
 	return m
+}
+
+func ReadCSV(csvFilePath string) [][]string {
+	file, err := os.Open(csvFilePath)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Bad file : %s", err)
+		os.Exit(1)
+	}
+	defer file.Close()
+	csvReader := csv.NewReader(file)
+	data, err := csvReader.ReadAll()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error reading csv file: %s", err)
+		os.Exit(1)
+	}
+	return data
+}
+
+func FileExists(path string) bool {
+	_, err := os.Stat(path)
+	return !errors.Is(err, os.ErrNotExist) 
 }

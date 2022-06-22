@@ -66,6 +66,7 @@ func CreateProducer(config *kafka.ConfigMap) *kafka.Producer {
 
 	if err != nil {
 		fmt.Printf("Error creating Producer: %s", err)
+		os.Exit(1)
 	}
 
 	return prd

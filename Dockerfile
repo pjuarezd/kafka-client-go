@@ -1,11 +1,11 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.5
+FROM ubuntu:latest
 WORKDIR /root
 COPY example example/
 COPY client.properties .
 COPY out/kafka-client kafka-client
 
 RUN \
-    microdnf update --nodocs && \
-    microdnf install curl ca-certificates --nodocs
+    apt-get update && \
+    apt-get install -y curl ca-certificates golang-go
 
 CMD ["./kafka-client"]

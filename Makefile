@@ -9,7 +9,7 @@ deps:
 	@go get
 
 build:
-	@CGO_ENABLED=1 go build --ldflags "-s -w" -o out/kafka-client .
+	@CGO_ENABLED=1 GOOS=linux go build -trimpath --ldflags "-s -w -X" -o out/kafka-client .
 
 docker:
 	@docker login -u $(OWNER) --password $(DOCKER_HUB_PASSWORD)

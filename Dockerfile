@@ -3,5 +3,9 @@ WORKDIR /root
 COPY example example/
 COPY client.properties .
 COPY out/kafka-client kafka-client
-RUN chmod +x kafka-client
+
+RUN \
+    microdnf update --nodocs && \
+    microdnf install curl ca-certificates --nodocs
+
 CMD ["./kafka-client"]

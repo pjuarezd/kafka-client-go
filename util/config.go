@@ -1,8 +1,8 @@
 package util
 
 import (
-	"encoding/csv"
 	"bufio"
+	"encoding/csv"
 	"errors"
 	"fmt"
 	"os"
@@ -37,6 +37,12 @@ func ReadConfig(configFilePath string) kafka.ConfigMap {
 	return m
 }
 
+func SetConfig(bootstrapServer string) kafka.ConfigMap {
+	m := make(map[string]kafka.ConfigValue)
+	m["bootstrap.servers"] = bootstrapServer
+	return m
+}
+
 func ReadCSV(csvFilePath string) [][]string {
 	file, err := os.Open(csvFilePath)
 	if err != nil {
@@ -55,5 +61,5 @@ func ReadCSV(csvFilePath string) [][]string {
 
 func FileExists(path string) bool {
 	_, err := os.Stat(path)
-	return !errors.Is(err, os.ErrNotExist) 
+	return !errors.Is(err, os.ErrNotExist)
 }

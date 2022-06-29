@@ -88,7 +88,7 @@ func producerCmdFn(cmd *cobra.Command, args []string) {
 		os.Exit(1)
 	}
 
-	messages := ParseKafmaMessagesFromCsv(csvFilePath)
+	messages := ParseKafkaMessagesFromCsv(csvFilePath)
 
 	for i, msg := range messages {
 		err := SendMessage(kfkProducer, msg)
@@ -103,7 +103,7 @@ func producerCmdFn(cmd *cobra.Command, args []string) {
 	defer kfkProducer.Close()
 }
 
-func ParseKafmaMessagesFromCsv(cvsFilePath string) []KafkaMessage {
+func ParseKafkaMessagesFromCsv(cvsFilePath string) []KafkaMessage {
 	var messages []KafkaMessage
 	var headers []string
 	for index, line := range util.ReadCSV(cvsFilePath) {
@@ -117,7 +117,7 @@ func ParseKafmaMessagesFromCsv(cvsFilePath string) []KafkaMessage {
 			header := kafka.Header{Key: headers[fi], Value: []byte(field)}
 			kHeaders = append(kHeaders, header)
 		}
-		messages = append(messages, KafkaMessage{Message: []byte(line[0]), Headers: []kafka.Header{}})
+		messages = append(messages, KafkaMessage{Message: []byte(line[0]), Headers: kHeaders})
 	}
 	return messages
 }

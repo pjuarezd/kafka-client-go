@@ -54,7 +54,7 @@ func consumerCmdFn(cmd *cobra.Command, args []string) {
 						e.TopicPartition)
 				}
 			case kafka.Error:
-				fmt.Fprintf(os.Stderr, "%% Error: %v: %v\n", e.Code(), e)
+				//fmt.Fprintf(os.Stderr, "%% Error: %v: %v\n", e.Code(), e)
 				if e.Code() == kafka.ErrAllBrokersDown {
 					run = false
 				}

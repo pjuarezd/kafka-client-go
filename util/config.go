@@ -37,14 +37,8 @@ func ReadConfig(configFilePath string) kafka.ConfigMap {
 	return m
 }
 
-func SetConfig(setting string, value string) kafka.ConfigMap {
-	var m kafka.ConfigMap
-	if m == nil {
-		m = make(map[string]kafka.ConfigValue)
-	}
-
-	m[setting] = value
-	return m
+func SetConfig(config kafka.ConfigMap, setting string, value string) {
+	config[setting] = value
 }
 
 func ReadCSV(csvFilePath string) [][]string {

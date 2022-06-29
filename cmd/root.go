@@ -43,14 +43,17 @@ func init() {
 }
 
 func loadConfig() {
+	config = make(map[string]kafka.ConfigValue)
+
 	if cfgFile == "" && bootstrapServers == "" {
 		fmt.Println("You must set either config or server")
 		os.Exit(1)
 	}
 
 	if cfgFile == "" {
-		config = util.SetConfig("bootstrap.servers", bootstrapServers)
-		config = util.SetConfig("group.id", group)
+		util.SetConfig(config, "bootstrap.servers", bootstrapServers)
+		util.SetConfig(config, "group.id", group)
+		fmt.Printf("que %s", config["bootstrap.servers"])
 	} else {
 		if !util.FileExists(cfgFile) {
 			fmt.Printf("Unable to open config file, file do not exist: \"%s\"", cfgFile)

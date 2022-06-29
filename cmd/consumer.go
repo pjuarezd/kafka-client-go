@@ -23,7 +23,7 @@ var consumerCmd = &cobra.Command{
 }
 
 func consumerCmdFn(cmd *cobra.Command, args []string) {
-	fmt.Println("Creating Producer")
+	fmt.Println("Creating Consumer")
 	kfkConsumer := client.CreateConsumerAndSuscribe(&config, topicName)
 	sigchan := make(chan os.Signal, 1)
 	signal.Notify(sigchan, syscall.SIGINT, syscall.SIGTERM)

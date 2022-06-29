@@ -13,7 +13,7 @@ var (
 )
 
 func init() {
-	topicCmd.Flags().StringVar(&topicName, "topic", "", "name of the topic to create")
+	topicCmd.Flags().StringVar(&topicName, "name", "", "name of the topic to create")
 	topicCmd.Flags().IntVar(&partitions, "partitions", 2, "number of partitions")
 	topicCmd.Flags().IntVar(&replicationFactor, "shards", 1, "replication factor")
 	topicCmd.MarkFlagRequired("topic")

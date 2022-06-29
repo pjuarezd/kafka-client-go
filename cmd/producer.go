@@ -26,9 +26,9 @@ type KafkaMessage struct {
 
 func init() {
 	producerCdm.Flags().StringVarP(&topicName, "topic", "r", "", "name of the topic to listen")
-	producerCdm.Flags().StringVar(&message, "message", "", "message to send to kafka")
-	producerCdm.Flags().StringVar(&headers, "headers", "", "Key value, comma separated to add as headers of the message")
-	producerCdm.Flags().IntVar(&delay, "delay", 1, "Delay in seconds between messages")
+	producerCdm.Flags().StringVar(&message, "message", "", "message to send to kafka TODO")
+	producerCdm.Flags().StringVar(&headers, "headers", "", "Key value, comma separated to add as headers of the message TODO")
+	producerCdm.Flags().IntVar(&delay, "delay", 1, "Delay in seconds between messages TODO")
 	producerCdm.Flags().StringVar(&csvFilePath, "file", "", "name of the topic to listen")
 	producerCdm.MarkFlagRequired("topic")
 	producerCdm.MarkFlagsRequiredTogether("message", "headers")
@@ -97,7 +97,7 @@ func producerCmdFn(cmd *cobra.Command, args []string) {
 			continue
 		}
 	}
-	for kfkProducer.Flush(10000) > 0{
+	for kfkProducer.Flush(10000) > 0 {
 		fmt.Println("Still waiting to flush outstanding messages")
 	}
 	defer kfkProducer.Close()

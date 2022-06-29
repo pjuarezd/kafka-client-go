@@ -56,6 +56,7 @@ func CreateConsumerAndSuscribe(config *kafka.ConfigMap, topic string) *kafka.Con
 		fmt.Printf("Error creating consumer: %s", err)
 		os.Exit(2)
 	}
+	fmt.Printf("Created Consumer %v\n", cns)
 
 	errs := cns.SubscribeTopics([]string{topic}, nil)
 	if errs != nil {

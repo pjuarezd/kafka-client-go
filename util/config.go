@@ -37,9 +37,13 @@ func ReadConfig(configFilePath string) kafka.ConfigMap {
 	return m
 }
 
-func SetConfig(bootstrapServer string) kafka.ConfigMap {
-	m := make(map[string]kafka.ConfigValue)
-	m["bootstrap.servers"] = bootstrapServer
+func SetConfig(setting string, value string) kafka.ConfigMap {
+	var m kafka.ConfigMap
+	if m == nil {
+		m = make(map[string]kafka.ConfigValue)
+	}
+
+	m[setting] = value
 	return m
 }
 

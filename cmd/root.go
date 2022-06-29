@@ -13,6 +13,7 @@ var (
 	config           kafka.ConfigMap
 	cfgFile          string
 	bootstrapServers string
+	group            string
 )
 
 var rootCmd = &cobra.Command{
@@ -34,6 +35,7 @@ func init() {
 	cobra.OnInitialize(loadConfig)
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "broker config")
 	rootCmd.PersistentFlags().StringVar(&bootstrapServers, "server", "", "Bootstrap Server")
+	rootCmd.PersistentFlags().StringVar(&group, "group", "1", "group id")
 	rootCmd.MarkFlagsMutuallyExclusive("config", "server")
 	rootCmd.AddCommand(producerCdm)
 	rootCmd.AddCommand(consumerCmd)
@@ -47,7 +49,8 @@ func loadConfig() {
 	}
 
 	if cfgFile == "" {
-		config = util.SetConfig(bootstrapServers)
+		config = util.SetConfig("bootstrap.servers", bootstrapServers)
+		config = util.SetConfig("group.id", group)
 	} else {
 		if !util.FileExists(cfgFile) {
 			fmt.Printf("Unable to open config file, file do not exist: \"%s\"", cfgFile)

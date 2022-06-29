@@ -14,6 +14,7 @@ import (
 func init() {
 	consumerCmd.Flags().StringVar(&topicName, "topic", "", "name of the topic to listen")
 	consumerCmd.MarkFlagRequired("topic")
+	consumerCmd.MarkFlagRequired("group")
 }
 
 var consumerCmd = &cobra.Command{

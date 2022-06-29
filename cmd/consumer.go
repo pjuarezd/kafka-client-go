@@ -12,8 +12,8 @@ import (
 )
 
 func init() {
-	producerCdm.Flags().StringVarP(&topicName, "topic", "r", "", "name of the topic to listen")
-	producerCdm.MarkFlagRequired("topic")
+	consumerCmd.Flags().StringVar(&topicName, "topic", "", "name of the topic to listen")
+	consumerCmd.MarkFlagRequired("topic")
 }
 
 var consumerCmd = &cobra.Command{

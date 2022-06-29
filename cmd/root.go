@@ -36,7 +36,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&bootstrapServers, "server", "", "Bootstrap Server")
 	rootCmd.MarkFlagsMutuallyExclusive("config", "server")
 	rootCmd.AddCommand(producerCdm)
-	//rootCmd.AddCommand(consumerCmd)
+	rootCmd.AddCommand(consumerCmd)
 	rootCmd.AddCommand(topicCmd)
 }
 

@@ -25,11 +25,11 @@ type KafkaMessage struct {
 }
 
 func init() {
-	producerCdm.Flags().StringVarP(&topicName, "topic", "r", "", "name of the topic to listen")
+	producerCdm.Flags().StringVar(&topicName, "topic", "", "name of the topic to write")
 	producerCdm.Flags().StringVar(&message, "message", "", "message to send to kafka TODO")
-	producerCdm.Flags().StringVar(&headers, "headers", "", "Key value, comma separated to add as headers of the message TODO")
+	producerCdm.Flags().StringVar(&headers, "headers", "", "Key=value, comma separated to add as headers of the message TODO")
 	producerCdm.Flags().IntVar(&delay, "delay", 1, "Delay in seconds between messages TODO")
-	producerCdm.Flags().StringVar(&csvFilePath, "file", "", "name of the topic to listen")
+	producerCdm.Flags().StringVar(&csvFilePath, "file", "", "Input CSV file")
 	producerCdm.MarkFlagRequired("topic")
 	producerCdm.MarkFlagsRequiredTogether("message", "headers")
 	producerCdm.MarkFlagsMutuallyExclusive("message", "file")

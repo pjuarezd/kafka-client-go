@@ -8,13 +8,13 @@ import (
 )
 
 func init() {
-	topicCmd.PersistentFlags().StringVar(&topicName, "topic", "", "name of the topic to listen")
+	topicCmd.Flags().StringVar(&topicName, "topic", "", "name of the topic to listen")
 }
 
 var topicCmd = &cobra.Command{
-	Use: "topic",
+	Use:   "topic",
 	Short: "Creates a new topic in kafka",
-	Run: runFn,
+	Run:   runFn,
 }
 
 func runFn(cmd *cobra.Command, args []string) {
